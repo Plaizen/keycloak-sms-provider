@@ -167,6 +167,11 @@ public class ApiSmsService implements SmsService{
 			phone_number = phone_number.replaceFirst("0", countrycode);
 			logger.infof("Clean phone number: convert 0 to +49, set phone number to %s", phone_number);
 		}
+		// convert non 0 lead numbers to +49
+		if (!phone_number.startsWith(countrycode)) {
+			phone_number = countrycode.concat(phone_number);
+			logger.infof("Clean phone number: convert 0 to +49, set phone number to %s", phone_number);
+		}
 		return phone_number;
 	}
 }
